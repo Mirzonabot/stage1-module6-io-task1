@@ -2,6 +2,7 @@ package com.epam.mjc.io;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 
 
@@ -16,7 +17,7 @@ public class FileReader {
                 stringBuilder.append((char) data);
                 data = inputStream.read();
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
