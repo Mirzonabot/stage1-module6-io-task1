@@ -18,7 +18,7 @@ public class FileReader {
                 data = inputStream.read();
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
 
 
