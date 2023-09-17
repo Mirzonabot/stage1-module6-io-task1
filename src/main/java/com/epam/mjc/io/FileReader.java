@@ -10,23 +10,14 @@ public class FileReader {
     public Profile getDataFromFile(File file) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        FileInputStream fileInputStream = null;
-
         try (InputStream inputStream = new FileInputStream(file)) {
-            int i;
-            while ((i = inputStream.read()) != -1) {
-                stringBuilder.append((char) i);
+            int data = inputStream.read();
+            while (data != -1) {
+                stringBuilder.append((char) data);
+                data = inputStream.read();
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
-        } finally {
-            if (fileInputStream != null) {
-                try {
-                    fileInputStream.close();
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-            }
         }
 
 
