@@ -8,13 +8,14 @@ import java.io.InputStream;
 public class FileReader {
 
     public Profile getDataFromFile(File file) {
-        FileInputStream fileInputStream = null;
         StringBuilder stringBuilder = new StringBuilder();
-        try {
 
-            fileInputStream = new FileInputStream(file);
-            while (fileInputStream.available() > 0) {
-                stringBuilder.append((char) fileInputStream.read());
+        FileInputStream fileInputStream = null;
+
+        try (InputStream inputStream = new FileInputStream(file)) {
+            int i;
+            while ((i = inputStream.read()) != -1) {
+                stringBuilder.append((char) i);
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -28,6 +29,8 @@ public class FileReader {
             }
         }
 
+
+
         String[] data = stringBuilder.toString().split("\n");
 
         Profile profile = new Profile();
@@ -39,9 +42,4 @@ public class FileReader {
         return profile;
     }
 
-//    public static void main(String[] args) {
-//        FileReader fileReader = new FileReader();
-//        Profile profile = fileReader.getDataFromFile(new File("src/main/resources/Profile.txt"));
-//        System.out.println(profile);
-//    }
 }
